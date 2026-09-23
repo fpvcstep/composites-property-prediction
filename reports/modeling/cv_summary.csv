@@ -1,0 +1,13 @@
+task,family,variant,candidate_id,cv_rmse_mean,cv_rmse_std,cv_mae_mean,cv_r2_mean,train_cv_rmse_mean,selected
+direct_tensile_modulus,baseline,raw,direct_tensile_modulus:baseline:raw:44136fa355,3.08731029192,0.257094369841,2.48289883511,-0.0150611779029,3.09435439263,True
+direct_tensile_modulus,ridge,iqr_filtered,direct_tensile_modulus:ridge:iqr_filtered:aa6e7d121f,3.11132508418,0.255041103304,2.50716090627,-0.0317673167859,3.06248071233,False
+direct_tensile_modulus,random_forest,iqr_filtered,direct_tensile_modulus:random_forest:iqr_filtered:9e80c8d5d3,3.12975850629,0.285498805453,2.49967695856,-0.042509543259,1.82966770424,False
+direct_tensile_modulus,gradient_boosting,iqr_filtered,direct_tensile_modulus:gradient_boosting:iqr_filtered:9dcb62daed,3.12024610331,0.276788218319,2.49294316874,-0.0362993774442,2.84716217556,False
+direct_tensile_modulus,svr,raw,direct_tensile_modulus:svr:raw:cc7290443d,3.13700866396,0.247435419057,2.5133172473,-0.0497616177897,2.80469175259,False
+direct_tensile_strength,baseline,raw,direct_tensile_strength:baseline:raw:44136fa355,490.499768802,24.618095601,384.750224011,-0.0109377705089,490.462900641,False
+direct_tensile_strength,ridge,raw,direct_tensile_strength:ridge:raw:d760ee1674,491.660983825,22.4229764826,387.164964098,-0.0162277761528,484.753772107,False
+direct_tensile_strength,random_forest,raw,direct_tensile_strength:random_forest:raw:eb6026f4f2,494.074844378,24.9141439717,391.220533831,-0.0263074440035,289.425313724,False
+direct_tensile_strength,gradient_boosting,raw,direct_tensile_strength:gradient_boosting:raw:fd66dbfe71,490.208727458,23.8523960258,387.224700192,-0.010280170952,445.491297118,True
+direct_tensile_strength,svr,raw,direct_tensile_strength:svr:raw:cc7290443d,494.23634296,22.0940435098,389.938057691,-0.0274335686987,445.943251215,False
+matrix_filler_ratio,baseline,raw,matrix_filler_ratio:baseline:raw:44136fa355,0.906462520656,0.0474560546074,0.719302318965,-0.00767817013719,0.906927802872,False
+matrix_filler_ratio,mlp,raw,matrix_filler_ratio:mlp:raw:a957c09ff4,0.935318786217,0.0576950667478,0.750578577083,-0.0724702860868,0.869784198074,True

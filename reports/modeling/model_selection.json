@@ -1,0 +1,199 @@
+{
+  "frozen_before_test": true,
+  "schema_version": 1,
+  "selection_rule": "minimum mean 10-fold validation RMSE with fixed tie order",
+  "split_manifest_sha256": "1244b345043399d1e5e597c3c2b885d15bf97f63b616796ac67a77b2efe87f22",
+  "tasks": {
+    "direct_tensile_modulus": {
+      "baseline_artifact": {
+        "path": "models/direct_tensile_modulus_baseline.joblib",
+        "sha256": "76d4810f6a6bf22191f5abb5a74aa2119cf2294cde0f7ebc8d45bf3db2d029d3",
+        "size_bytes": 970
+      },
+      "baseline_cv_rmse": 3.08731029191636,
+      "classical_family_artifacts": [
+        {
+          "candidate_id": "direct_tensile_modulus:ridge:iqr_filtered:aa6e7d121f",
+          "cv_rmse": 3.1113250841831963,
+          "family": "ridge",
+          "path": "models/direct_tensile_modulus_rank1.joblib",
+          "rank": 1,
+          "sha256": "9d111dd9a607c01e4725f02a3b0b7228f4a699e0cda8ddf67ff2f3fb18585cb0",
+          "size_bytes": 2476,
+          "variant": "iqr_filtered"
+        },
+        {
+          "candidate_id": "direct_tensile_modulus:gradient_boosting:iqr_filtered:9dcb62daed",
+          "cv_rmse": 3.120246103310743,
+          "family": "gradient_boosting",
+          "path": "models/direct_tensile_modulus_rank2.joblib",
+          "rank": 2,
+          "sha256": "a6ecfb6742717fe735727f54744d1c2bbe2e6197b0cab308bdc49ac9fb210c19",
+          "size_bytes": 31599,
+          "variant": "iqr_filtered"
+        },
+        {
+          "candidate_id": "direct_tensile_modulus:random_forest:iqr_filtered:9e80c8d5d3",
+          "cv_rmse": 3.1297585062927697,
+          "family": "random_forest",
+          "path": "models/direct_tensile_modulus_rank3.joblib",
+          "rank": 3,
+          "sha256": "a7f5b14c4f4d47f647f62988291d70749c49eddba68428f5757d6b3edc7cc719",
+          "size_bytes": 873551,
+          "variant": "iqr_filtered"
+        },
+        {
+          "candidate_id": "direct_tensile_modulus:svr:raw:cc7290443d",
+          "cv_rmse": 3.137008663958299,
+          "family": "svr",
+          "path": "models/direct_tensile_modulus_rank4.joblib",
+          "rank": 4,
+          "sha256": "12d1c2e8defa17bd8c519070340821e5d789d9017cede6331c1cb14e08e1160f",
+          "size_bytes": 58197,
+          "variant": "raw"
+        }
+      ],
+      "features": [
+        "Соотношение матрица-наполнитель",
+        "Плотность, кг/м3",
+        "модуль упругости, ГПа",
+        "Количество отвердителя, м.%",
+        "Содержание эпоксидных групп,%_2",
+        "Температура вспышки, С_2",
+        "Поверхностная плотность, г/м2",
+        "Потребление смолы, г/м2",
+        "Угол нашивки, град",
+        "Шаг нашивки",
+        "Плотность нашивки"
+      ],
+      "selected_candidate_id": "direct_tensile_modulus:baseline:raw:44136fa355",
+      "selected_cv_rmse": 3.08731029191636,
+      "selected_family": "baseline",
+      "selected_params": {},
+      "selected_variant": "raw",
+      "selection_scope": "baseline_and_family_winners",
+      "target": "Модуль упругости при растяжении, ГПа",
+      "unit": "ГПа"
+    },
+    "direct_tensile_strength": {
+      "baseline_artifact": {
+        "path": "models/direct_tensile_strength_baseline.joblib",
+        "sha256": "7b4d729ed54e17162a44288802ffcdbf5c08ddecf4140014791b6ef711a1dd70",
+        "size_bytes": 971
+      },
+      "baseline_cv_rmse": 490.4997688023283,
+      "classical_family_artifacts": [
+        {
+          "candidate_id": "direct_tensile_strength:gradient_boosting:raw:fd66dbfe71",
+          "cv_rmse": 490.20872745846157,
+          "family": "gradient_boosting",
+          "path": "models/direct_tensile_strength_rank1.joblib",
+          "rank": 1,
+          "sha256": "66b2537941b0a486b29534abab0f874a1bcf0551a896221be200598ba2a3573c",
+          "size_bytes": 30566,
+          "variant": "raw"
+        },
+        {
+          "candidate_id": "direct_tensile_strength:ridge:raw:d760ee1674",
+          "cv_rmse": 491.6609838251503,
+          "family": "ridge",
+          "path": "models/direct_tensile_strength_rank2.joblib",
+          "rank": 2,
+          "sha256": "52976667139de46791d8f09e83bda523854f19b6a4dc1176d88527e076c4cc41",
+          "size_bytes": 1573,
+          "variant": "raw"
+        },
+        {
+          "candidate_id": "direct_tensile_strength:random_forest:raw:eb6026f4f2",
+          "cv_rmse": 494.07484437832284,
+          "family": "random_forest",
+          "path": "models/direct_tensile_strength_rank3.joblib",
+          "rank": 3,
+          "sha256": "48c8a855c52cbcb4033a4d8a8ffa4acf6dd3a1337c837bc97d6b2fb6d4f03e65",
+          "size_bytes": 1288476,
+          "variant": "raw"
+        },
+        {
+          "candidate_id": "direct_tensile_strength:svr:raw:cc7290443d",
+          "cv_rmse": 494.23634296030684,
+          "family": "svr",
+          "path": "models/direct_tensile_strength_rank4.joblib",
+          "rank": 4,
+          "sha256": "a58b27c2f04a8a1c8b0a4933aa22124165879bac03352d530688005fe6c029eb",
+          "size_bytes": 57630,
+          "variant": "raw"
+        }
+      ],
+      "features": [
+        "Соотношение матрица-наполнитель",
+        "Плотность, кг/м3",
+        "модуль упругости, ГПа",
+        "Количество отвердителя, м.%",
+        "Содержание эпоксидных групп,%_2",
+        "Температура вспышки, С_2",
+        "Поверхностная плотность, г/м2",
+        "Потребление смолы, г/м2",
+        "Угол нашивки, град",
+        "Шаг нашивки",
+        "Плотность нашивки"
+      ],
+      "selected_candidate_id": "direct_tensile_strength:gradient_boosting:raw:fd66dbfe71",
+      "selected_cv_rmse": 490.20872745846157,
+      "selected_family": "gradient_boosting",
+      "selected_params": {
+        "model__learning_rate": 0.03,
+        "model__max_depth": 2,
+        "model__n_estimators": 150
+      },
+      "selected_variant": "raw",
+      "selection_scope": "baseline_and_family_winners",
+      "target": "Прочность при растяжении, МПа",
+      "unit": "МПа"
+    },
+    "matrix_filler_ratio": {
+      "baseline_artifact": {
+        "path": "models/matrix_filler_ratio_baseline.joblib",
+        "sha256": "981ae6dd9707e79c5c8515a4aeb12f06af987b15a0e3bd83dba209760006f31d",
+        "size_bytes": 983
+      },
+      "baseline_cv_rmse": 0.9064625206558681,
+      "features": [
+        "Плотность, кг/м3",
+        "модуль упругости, ГПа",
+        "Количество отвердителя, м.%",
+        "Содержание эпоксидных групп,%_2",
+        "Температура вспышки, С_2",
+        "Поверхностная плотность, г/м2",
+        "Модуль упругости при растяжении, ГПа",
+        "Прочность при растяжении, МПа",
+        "Потребление смолы, г/м2",
+        "Угол нашивки, град",
+        "Шаг нашивки",
+        "Плотность нашивки"
+      ],
+      "mlp_artifact": {
+        "path": "models/matrix_filler_ratio_mlp.joblib",
+        "sha256": "81ede6ec6bc7d63f4cfc21b5411b8a84f8450b7154733559fc7578e669d15a9a",
+        "size_bytes": 28956
+      },
+      "n_iter_full_train": 76,
+      "reached_max_iter_full_train": false,
+      "selected_candidate_id": "matrix_filler_ratio:mlp:raw:a957c09ff4",
+      "selected_cv_rmse": 0.9353187862165822,
+      "selected_family": "mlp",
+      "selected_params": {
+        "model__regressor__alpha": 0.01,
+        "model__regressor__hidden_layer_sizes": [
+          32,
+          16
+        ]
+      },
+      "selected_variant": "raw",
+      "selection_scope": "mlp_candidates",
+      "target": "Соотношение матрица-наполнитель",
+      "unit": "не указана",
+      "warnings": []
+    }
+  },
+  "test_rows_used": 0
+}

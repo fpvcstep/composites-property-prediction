@@ -1,0 +1,25 @@
+{
+  "created_at_utc": "2026-09-23T22:53:01.196961+00:00",
+  "cv_folds": 10,
+  "elapsed_seconds": 142.4948985000001,
+  "estimated_fit_calls_including_refits": 930,
+  "grid_search_n_jobs": 2,
+  "hardener_train_observation": {
+    "count_above_100": 468,
+    "field": "Количество отвердителя, м.%",
+    "interpretation": "Values above 100 would be impossible for mass percent of a finished mixture, but the percentage basis is undocumented; no rows were removed.",
+    "maximum": 198.953207190451,
+    "minimum": 17.7402745562519,
+    "synthetic_origin_claimed": false
+  },
+  "python_version": "3.12.14",
+  "raw_sources_sha256": {
+    "X_bp.xlsx": "14b6a82bdc7511c15a8e58397cf42855e9ffa51baa289b8253cec288dca812c8",
+    "X_nup.xlsx": "1c7aa1be64596020f5621ca72f0d0de43d2dc689ca48ff2229bb393f1e08cb52"
+  },
+  "schema_version": 1,
+  "scikit_learn_version": "1.7.2",
+  "split_manifest_sha256": "1244b345043399d1e5e597c3c2b885d15bf97f63b616796ac67a77b2efe87f22",
+  "test_rows_used": 0,
+  "train_rows": 716
+}
