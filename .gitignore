@@ -10,7 +10,29 @@ htmlcov/
 .idea/
 .vscode/
 .DS_Store
-artifacts/
-models/
-*.joblib
-*.pkl
+
+# Local tooling and temporary QA/render output
+.agents/
+.codex/
+qa/
+tmp/
+temp/
+renderer_build/
+rendered/
+build/
+dist/
+*.egg-info/
+*.log
+
+# Internal coordination files
+/AGENTS.md
+/checklist.md
+
+# Local secrets
+.env
+.env.*
+!.env.example
+secrets/
+credentials*.json
+*.pem
+*.key
