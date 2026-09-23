@@ -13,6 +13,8 @@
 ```powershell
 docker build -t composites-thesis:local .
 docker run --rm composites-thesis:local
+docker run --rm -v "${PWD}:/workspace" -w /workspace composites-thesis:local python scripts/prepare_data.py
+docker run --rm -v "${PWD}:/workspace" -w /workspace composites-thesis:local python scripts/run_eda.py
 docker run --rm -v "${PWD}:/workspace" -w /workspace composites-thesis:local python scripts/audit_data.py
 ```
 
@@ -29,14 +31,23 @@ py -3.12 -m venv .venv
 .venv\Scripts\python -m pip install --no-deps -e .
 .venv\Scripts\python -m pytest -q
 .venv\Scripts\python scripts/audit_data.py
+.venv\Scripts\python scripts/prepare_data.py
+.venv\Scripts\python scripts/run_eda.py
 ```
 
 ## Результаты текущего этапа
 
 - `reports/data_audit.json` — машиночитаемый аудит файлов и объединения;
+- `data/splits.json` — фиксированные индексы train/test и десяти CV-фолдов;
+- `reports/eda/` — train-only статистики, корреляции, кандидаты IQR и нормализация;
+- `figures/eda/` — полный набор EDA-графиков для итоговых материалов;
 - `docs/data_dictionary.md` — словарь полей, схемы целей и известные ограничения;
-- `tests/test_data.py` — проверки индекса, схемы и ожидаемых потерь при соединении.
+- `docs/validation_protocol.md` и `docs/eda.md` — финальные методические описания;
+- `src/composites/preprocessing.py` — строгие pipeline-компоненты для следующего этапа CV;
+- `tests/` — проверки данных, разбиения, локального fit преобразований и IQR-абляции.
 
 Неподтверждённые единицы и происхождение наблюдений не додумываются. Две колонки модуля упругости имеют разные имена и роли и не смешиваются.
+
+EDA использует только 716 обучающих строк. Отложенные 307 строк не участвуют в графиках, преобразованиях и выборе решений. Основные модели и финальные test-метрики на этом этапе ещё не рассчитаны.
 
 `requirements.txt` фиксирует прямые зависимости проекта, а `requirements.lock.txt` — полный набор версий, фактически проверенный в Docker на Python 3.12.

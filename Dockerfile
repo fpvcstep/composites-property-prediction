@@ -14,4 +14,4 @@ RUN python -m pip install --no-cache-dir --upgrade pip \
 
 COPY . .
 
-CMD ["python", "-m", "pytest", "-q"]
+CMD ["python", "-m", "pytest", "-q", "-p", "no:cacheprovider"]
