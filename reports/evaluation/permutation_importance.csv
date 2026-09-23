@@ -1,0 +1,35 @@
+task,family,feature,importance_mean_rmse,importance_std_rmse
+direct_tensile_modulus,baseline,Соотношение матрица-наполнитель,0,0
+direct_tensile_modulus,baseline,"Плотность, кг/м3",0,0
+direct_tensile_modulus,baseline,"модуль упругости, ГПа",0,0
+direct_tensile_modulus,baseline,"Количество отвердителя, м.%",0,0
+direct_tensile_modulus,baseline,"Содержание эпоксидных групп,%_2",0,0
+direct_tensile_modulus,baseline,"Температура вспышки, С_2",0,0
+direct_tensile_modulus,baseline,"Поверхностная плотность, г/м2",0,0
+direct_tensile_modulus,baseline,"Потребление смолы, г/м2",0,0
+direct_tensile_modulus,baseline,"Угол нашивки, град",0,0
+direct_tensile_modulus,baseline,Шаг нашивки,0,0
+direct_tensile_modulus,baseline,Плотность нашивки,0,0
+direct_tensile_strength,gradient_boosting,Соотношение матрица-наполнитель,1.04852947677,0.819811361192
+direct_tensile_strength,gradient_boosting,"Плотность, кг/м3",2.03103069617,2.23332036221
+direct_tensile_strength,gradient_boosting,"модуль упругости, ГПа",1.18558931907,1.90556653708
+direct_tensile_strength,gradient_boosting,"Количество отвердителя, м.%",3.31413339988,1.53029197978
+direct_tensile_strength,gradient_boosting,"Содержание эпоксидных групп,%_2",4.58086547324,1.65688264247
+direct_tensile_strength,gradient_boosting,"Температура вспышки, С_2",-0.304715373382,1.96151765353
+direct_tensile_strength,gradient_boosting,"Поверхностная плотность, г/м2",1.44705246978,1.96480364321
+direct_tensile_strength,gradient_boosting,"Потребление смолы, г/м2",0.171946706135,2.21352797507
+direct_tensile_strength,gradient_boosting,"Угол нашивки, град",0.403821121605,0.442635271595
+direct_tensile_strength,gradient_boosting,Шаг нашивки,2.0220179264,1.11984337935
+direct_tensile_strength,gradient_boosting,Плотность нашивки,-2.10166789608,1.55846623167
+matrix_filler_ratio,mlp,"Плотность, кг/м3",0.00741523776043,0.00251736991597
+matrix_filler_ratio,mlp,"модуль упругости, ГПа",0.00486736815454,0.0024287563594
+matrix_filler_ratio,mlp,"Количество отвердителя, м.%",0.000614979082316,0.00290827799589
+matrix_filler_ratio,mlp,"Содержание эпоксидных групп,%_2",-0.00671171311231,0.00264818959887
+matrix_filler_ratio,mlp,"Температура вспышки, С_2",-0.00548216853787,0.00294887183699
+matrix_filler_ratio,mlp,"Поверхностная плотность, г/м2",0.00690765263059,0.00487399538932
+matrix_filler_ratio,mlp,"Модуль упругости при растяжении, ГПа",0.00188616111168,0.00299230924
+matrix_filler_ratio,mlp,"Прочность при растяжении, МПа",8.55623991548e-06,0.0047764678854
+matrix_filler_ratio,mlp,"Потребление смолы, г/м2",-0.00274718510513,0.00274064810936
+matrix_filler_ratio,mlp,"Угол нашивки, град",0.00754628770634,0.00366936805463
+matrix_filler_ratio,mlp,Шаг нашивки,-0.00524977076228,0.00469896958589
+matrix_filler_ratio,mlp,Плотность нашивки,0.00214385094217,0.00363280236264
