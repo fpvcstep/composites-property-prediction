@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+*.xlsx binary !eol
+*.joblib binary !eol
+*.png binary !eol
+*.pdf binary !eol
+*.docx binary !eol
+*.pptx binary !eol
