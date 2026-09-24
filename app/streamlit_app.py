@@ -58,6 +58,10 @@ except InferenceError as exc:
     st.stop()
 
 defaults = predictor.defaults()
+st.info(
+    "Поля заполнены медианами обучающих данных. Это демонстрационный ввод, "
+    "а не измерения нового образца; замените значения фактическими."
+)
 with st.form("prediction_form"):
     values: dict[str, float] = {}
     for feature in DIRECT_FEATURES:
