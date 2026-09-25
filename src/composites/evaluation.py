@@ -240,24 +240,29 @@ def _plot_residuals(predictions: pd.DataFrame, output: Path) -> None:
 def _plot_nn_diagnostics(modeling_dir: Path, output: Path) -> None:
     history = pd.read_csv(modeling_dir / "nn_history.csv")
     stability = pd.read_csv(modeling_dir / "nn_stability.csv")
+    epochs = int(history["iteration"].iloc[-1])
+    best_epoch = int(
+        history.loc[history["validation_score"].idxmax(), "iteration"]
+    )
+    seed_count = int(stability["seed"].nunique())
     fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
     loss_line = axes[0].plot(
         history["iteration"],
         history["loss"],
-        label="Функция потерь train",
+        label="Loss обучения",
         color="#4c78a8",
     )
     validation_axis = axes[0].twinx()
     validation_line = validation_axis.plot(
         history["iteration"],
         history["validation_score"],
-        label="Внутренний validation R²",
+        label="R² внутренней проверки",
         color="#f58518",
     )
-    axes[0].set_xlabel("Итерация")
+    axes[0].set_xlabel("Эпоха")
     axes[0].set_ylabel("Потери MLP: ½MSE + L2")
     validation_axis.set_ylabel("R² внутренней validation-части")
-    axes[0].set_title("MLP: кривая обучения стандартизованной y, полный train n=716")
+    axes[0].set_title("MLP: внутренняя проверка для early stopping")
     axes[0].legend(loss_line + validation_line, [line.get_label() for line in loss_line + validation_line])
     sns.boxplot(data=stability, x="seed", y="validation_rmse", ax=axes[1])
     sns.stripplot(
@@ -269,11 +274,12 @@ def _plot_nn_diagnostics(modeling_dir: Path, output: Path) -> None:
         size=4,
         ax=axes[1],
     )
-    axes[1].set_xlabel("Seed инициализации")
+    axes[1].set_xlabel("Seed стохастического обучения")
     axes[1].set_ylabel("CV RMSE отношения, исходная единица не указана")
-    axes[1].set_title("MLP: устойчивость на 10 сохранённых фолдах")
+    axes[1].set_title(f"MLP: вариативность CV по {seed_count} seeds")
     fig.suptitle(
-        "Диагностика MLP: early stopping на внутренних 10% train; test не использован"
+        f"Диагностика MLP: {epochs} эпох, восстановлены веса эпохи {best_epoch}; "
+        "test не использован"
     )
     fig.tight_layout()
     fig.savefig(output, dpi=180, bbox_inches="tight")
@@ -391,14 +397,16 @@ def _write_results(
     lines.extend(
         [
             "",
-            "Для модуля упругости CV выбрала средний baseline. Его прогноз постоянный, "
+            "Для модуля упругости среди испытанных семейств и зафиксированных сеток "
+            "CV выбрала средний baseline по минимуму средней RMSE. Его прогноз постоянный, "
             f"поэтому пермутационные важности равны нулю; test R² = {modulus_r2:.3f}. "
             "Нулевая важность здесь означает отсутствие использования признаков baseline, "
             "а не доказанную физическую незначимость факторов.",
             "",
-            "Для прочности выбрана Gradient Boosting, но её CV-преимущество над baseline "
-            f"было минимальным; test R² = {strength_r2:.3f}. Разрыв train/test следует "
-            "трактовать как ограничение обобщения, а не как промышленную точность.",
+            "Для прочности Gradient Boosting выбрана только по минимуму средней CV RMSE; "
+            "это правило выбора не доказывает статистическое или практически значимое "
+            f"превосходство над baseline. Test R² = {strength_r2:.3f} не подтверждает "
+            "промышленную точность.",
             "",
             "Обязательная MLP отношения уступила baseline ещё на CV и сохранялась по "
             f"условию задания; test R² = {ratio_r2:.3f}. Она оценивает отношение по полному "
@@ -412,8 +420,9 @@ def _write_results(
             "- В поле количества отвердителя 468 из 716 train-значений выше 100. Для "
             "массовой доли готовой смеси это невозможно, но база процентов неизвестна; "
             "наблюдения сохранены и синтетическое происхождение не заявляется.",
-            "- Происхождение наблюдений и группы опытов неизвестны. Случайный holdout "
-            "характеризует только эту выборку и не доказывает перенос на новые материалы.",
+            "- Происхождение наблюдений, партии и группы опытов неизвестны. Случайный "
+            "holdout оценивает прогноз для отложенных строк той же таблицы при данном "
+            "разбиении и не доказывает перенос на новые классы материалов.",
             "- Результаты не заменяют лабораторные испытания.",
             "",
             "## Рисунки",
@@ -422,8 +431,11 @@ def _write_results(
             "train/test, с исходными единицами целей и линией идеального прогноза.",
             "2. `residuals.png` — остатки факт минус прогноз для полных train/test; "
             "систематические структуры указывают на ограничения моделей.",
-            "3. `nn_diagnostics.png` — loss/validation score полного train-fit и CV RMSE "
-            "по seeds 42–44; seed не выбирался по test.",
+            "3. `nn_diagnostics.png` — early stopping восстановил веса лучшей эпохи. "
+            "Внутренние 10% не являются независимой оценкой: scalers "
+            "X/y обучены на всех 716 строках до внутреннего split; outer CV и test "
+            "оставались изолированы. Seeds 42–44 отражают совокупную стохастическую "
+            "вариативность инициализации, внутреннего split и мини-батчей.",
             "4. `permutation_importance.png` — рост test RMSE после перестановки признака; "
             "для baseline-модуля все значения нулевые по определению.",
             "   Для печати на A4 те же значения сохранены отдельными читаемыми файлами "
@@ -564,6 +576,7 @@ def run_evaluation(
             "features": list(task.features),
             "model_family": family,
             "artifact": Path(artifact).name,
+            "artifact_sha256": sha256_file(_resolve_artifact(project_root, artifact)),
             "cv_rmse": float(selection_task["selected_cv_rmse"]),
             "baseline_cv_rmse": float(selection_task["baseline_cv_rmse"]),
             "test_metrics": {

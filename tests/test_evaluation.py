@@ -92,6 +92,13 @@ def test_manifest_loads_real_direct_models_and_predicts() -> None:
         and len(Path(item["artifact"]).parts) == 1
         for item in manifest["tasks"].values()
     )
+    assert all(
+        item["artifact_sha256"]
+        == hashlib.sha256(
+            (PROJECT_ROOT / "models" / item["artifact"]).read_bytes()
+        ).hexdigest()
+        for item in manifest["tasks"].values()
+    )
 
     predictor = load_direct_predictor(PROJECT_ROOT / "models")
     frame = pd.DataFrame([predictor.defaults()])

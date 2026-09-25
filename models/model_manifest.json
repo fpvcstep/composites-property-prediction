@@ -3,6 +3,7 @@
   "tasks": {
     "direct_tensile_modulus": {
       "artifact": "direct_tensile_modulus_baseline.joblib",
+      "artifact_sha256": "76d4810f6a6bf22191f5abb5a74aa2119cf2294cde0f7ebc8d45bf3db2d029d3",
       "baseline_cv_rmse": 3.08731029191636,
       "cv_rmse": 3.08731029191636,
       "features": [
@@ -86,6 +87,7 @@
     },
     "direct_tensile_strength": {
       "artifact": "direct_tensile_strength_rank1.joblib",
+      "artifact_sha256": "66b2537941b0a486b29534abab0f874a1bcf0551a896221be200598ba2a3573c",
       "baseline_cv_rmse": 490.4997688023283,
       "cv_rmse": 490.20872745846157,
       "features": [
@@ -169,6 +171,7 @@
     },
     "matrix_filler_ratio": {
       "artifact": "matrix_filler_ratio_mlp.joblib",
+      "artifact_sha256": "81ede6ec6bc7d63f4cfc21b5411b8a84f8450b7154733559fc7578e669d15a9a",
       "baseline_cv_rmse": 0.9064625206558681,
       "cv_rmse": 0.9353187862165822,
       "features": [

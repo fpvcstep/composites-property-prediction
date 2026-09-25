@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import json
 import math
 from pathlib import Path
+import re
 from typing import Any
 
 import joblib
@@ -14,6 +15,7 @@ import numpy as np
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 
+from composites.data import sha256_file
 from composites.schema import (
     DIRECT_FEATURES,
     PATCH_ANGLE,
@@ -158,6 +160,14 @@ def load_direct_predictor(models_dir: str | Path) -> DirectPredictor:
             )
         model_family = _required_text(raw, "model_family", task_name)
         artifact_text = _required_text(raw, "artifact", task_name)
+        artifact_sha256 = raw.get("artifact_sha256")
+        if not isinstance(artifact_sha256, str) or re.fullmatch(
+            r"[0-9a-f]{64}", artifact_sha256
+        ) is None:
+            raise InferenceError(
+                f"Задача {task_name!r}: artifact_sha256 должен быть "
+                "SHA-256 из 64 строчных hex-символов."
+            )
         artifact_relative = Path(artifact_text)
         if artifact_relative.is_absolute():
             raise InferenceError(f"Artifact задачи {task_name!r} должен быть относительным.")
@@ -168,6 +178,18 @@ def load_direct_predictor(models_dir: str | Path) -> DirectPredictor:
         if not artifact_path.is_file():
             raise ModelUnavailableError(
                 f"Не найден артефакт обученной модели: {artifact_relative.as_posix()}."
+            )
+        try:
+            actual_sha256 = sha256_file(artifact_path)
+        except OSError as exc:
+            raise ModelUnavailableError(
+                f"Не удалось прочитать артефакт {artifact_relative.as_posix()} "
+                "для проверки SHA-256."
+            ) from exc
+        if actual_sha256 != artifact_sha256:
+            raise InferenceError(
+                f"Задача {task_name!r}: SHA-256 артефакта "
+                f"{artifact_relative.as_posix()} не совпадает с manifest."
             )
 
         ranges = _feature_ranges(raw.get("train_feature_ranges"), task_name)
@@ -203,6 +225,12 @@ def load_direct_predictor(models_dir: str | Path) -> DirectPredictor:
             ) from exc
         if not callable(getattr(model, "predict", None)):
             raise InferenceError(f"Артефакт задачи {task_name!r} не имеет метода predict.")
+        model_feature_names = getattr(model, "feature_names_in_", None)
+        if model_feature_names is not None and tuple(model_feature_names) != tuple(features):
+            raise InferenceError(
+                f"Артефакт задачи {task_name!r} обучен на признаках, которые "
+                "не совпадают с manifest по составу или порядку."
+            )
 
         loaded[task_name] = LoadedTask(
             name=task_name,

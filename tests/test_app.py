@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -42,6 +43,9 @@ def _fixture_models(models_dir: Path) -> None:
             "features": list(DIRECT_FEATURES),
             "model_family": "baseline DummyRegressor",
             "artifact": artifact,
+            "artifact_sha256": hashlib.sha256(
+                (models_dir / artifact).read_bytes()
+            ).hexdigest(),
             "cv_rmse": 1.0,
             "baseline_cv_rmse": 1.0,
             "test_metrics": {"rmse": 1.1, "mae": 0.9, "r2": 0.0},
