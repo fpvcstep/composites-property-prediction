@@ -12,8 +12,6 @@ htmlcov/
 .DS_Store
 
 # Local tooling and temporary QA/render output
-.agents/
-.codex/
 qa/
 tmp/
 temp/
@@ -23,10 +21,6 @@ build/
 dist/
 *.egg-info/
 *.log
-
-# Internal coordination files
-/AGENTS.md
-/checklist.md
 
 # Local secrets
 .env

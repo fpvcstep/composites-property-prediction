@@ -8,7 +8,7 @@
 
 Третья задача является обратной регрессией по известному полному профилю. Она не оптимизирует состав и не доказывает причинное влияние признаков.
 
-Численные результаты окончательной оценки независимо проверены. Доступны [профиль автора](https://github.com/fpvcstep), [репозиторий](https://github.com/fpvcstep/composites-property-prediction) и [история изменений](https://github.com/fpvcstep/composites-property-prediction/commits/main).
+Доступны [профиль автора](https://github.com/fpvcstep), [репозиторий](https://github.com/fpvcstep/composites-property-prediction) и [история изменений](https://github.com/fpvcstep/composites-property-prediction/commits/main).
 
 ## Данные и протокол
 
@@ -38,7 +38,7 @@
 - `models/` — проверенные sklearn pipeline и manifest приложения;
 - `notebooks/research.ipynb` — объяснение полного исследования без дублирования реализации;
 - `app/streamlit_app.py` — два прямых прогноза;
-- `docs/` — словарь данных, протоколы и материалы подготовки к защите;
+- `docs/` — словарь данных, протокол исследования, описание моделей, результатов и приложения;
 - `tests/` — проверки контрактов данных, pipeline, обучения и приложения.
 
 ## Материалы проекта
@@ -48,9 +48,9 @@
 - [Презентация в формате PPTX](presentation/defense.pptx)
 - [Презентация в формате PDF](presentation/defense.pdf)
 - [Исследовательский notebook](notebooks/research.ipynb)
-- [Руководство по подготовке к защите](docs/defense_guide.md)
-- [Текст доклада](docs/talk.md)
-- [Сценарий демонстрации](docs/demo.md)
+- [Словарь данных](docs/data_dictionary.md)
+- [Результаты моделирования](docs/results.md)
+- [Руководство по приложению](docs/application.md)
 
 ## Полное воспроизведение в Docker
 
