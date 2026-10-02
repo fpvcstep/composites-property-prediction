@@ -126,6 +126,58 @@ docker run --rm -e PYTHONDONTWRITEBYTECODE=1 -e MPLBACKEND=Agg -v "${PWD}:/works
 
 ## Streamlit-приложение
 
+Для нативного запуска в Windows нужна полная папка проекта и CPython 3.12. Обычная команда `python app/streamlit_app.py` не подходит: она может вызвать другой Python без закреплённых библиотек, не добавляет каталог `src` в путь импорта и запускает файл без механизма Streamlit.
+
+### Установка один раз
+
+Откройте CMD или PowerShell в корне `composites-property-prediction`. Проверьте версию:
+
+```text
+py -3.12 --version
+```
+
+Команда должна показать Python 3.12.x. Если launcher `py` не видит эту версию, установите CPython 3.12 и укажите полный путь к его `python.exe` вместо `py -3.12`. Python 3.13 для этого проекта не подходит.
+
+CMD:
+
+```bat
+py -3.12 -m venv "..\.venv-composites"
+"..\.venv-composites\Scripts\python.exe" -m pip install -r requirements.lock.txt
+```
+
+PowerShell:
+
+```powershell
+py -3.12 -m venv "..\.venv-composites"
+& "..\.venv-composites\Scripts\python.exe" -m pip install -r requirements.lock.txt
+```
+
+Виртуальное окружение создаётся рядом с репозиторием. Глобальный Python и содержимое проекта не изменяются.
+
+### Запуск каждый раз
+
+CMD из корня проекта:
+
+```bat
+set "PYTHONPATH=%CD%\src"
+set "PYTHONDONTWRITEBYTECODE=1"
+set "STREAMLIT_BROWSER_GATHER_USAGE_STATS=false"
+"..\.venv-composites\Scripts\python.exe" -m streamlit run app\streamlit_app.py --server.address=127.0.0.1 --server.port=8501 --browser.gatherUsageStats=false
+```
+
+PowerShell из корня проекта:
+
+```powershell
+$env:PYTHONPATH = (Join-Path $PWD 'src')
+$env:PYTHONDONTWRITEBYTECODE = '1'
+$env:STREAMLIT_BROWSER_GATHER_USAGE_STATS = 'false'
+& "..\.venv-composites\Scripts\python.exe" -m streamlit run app/streamlit_app.py --server.address=127.0.0.1 --server.port=8501 --browser.gatherUsageStats=false
+```
+
+После сообщения о готовности откройте `http://127.0.0.1:8501`. Окно CMD или PowerShell должно оставаться открытым; остановка сервера выполняется сочетанием `Ctrl+C`.
+
+### Запуск в Docker
+
 Приложение запускается из read-only bind mount:
 
 ```powershell
